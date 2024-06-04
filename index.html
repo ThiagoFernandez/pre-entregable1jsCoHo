@@ -15,16 +15,20 @@
     <label for="funds">Available Funds:</label>
     <input type="number" id="funds"><br><br>
 
-    <label for="game1">Price of Game 1:</label>
-    <input type="number" id="game1"><br><br>
-
-    <label for="game2">Price of Game 2:</label>
-    <input type="number" id="game2"><br><br>
+    <label for="game1_price">Price of Game 1:</label>
+    <input type="number" id="game1_price" placeholder="Price of Game 1">
+    <input type="checkbox" id="game1_discount"> Has discount (%): <input type="number" id="game1_discount_value" min="0" max="100" step="1"><br><br>
+    
+    <label for="game2_price">Price of Game 2:</label>
+    <input type="number" id="game2_price" placeholder="Price of Game 2">
+    <input type="checkbox" id="game2_discount"> Has discount (%): <input type="number" id="game2_discount_value" min="0" max="100" step="1"><br><br>
+    
 
     <button onclick="calculateBudget()">Calculate Budget</button><br><br>
+    <button onclick="clearResults()">Clear</button>
 
     <div id="result"></div>
 
-    <script src="steam_budget.js"></script>
 </body>
 </html>
+
