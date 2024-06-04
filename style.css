@@ -4,6 +4,7 @@
 }
 body {
     text-align: center;
+    font-weight: bold;
     background-image: url(img/valvegod.jpg);
-    color: greenyellow;
+    color: #3BA0D0;
 }
