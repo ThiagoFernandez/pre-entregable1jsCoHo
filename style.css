@@ -1,3 +1,8 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -14,8 +19,10 @@ label {
     margin-right: 10px;
 }
 
-input[type="number"] {
-    width: 100px;
+input[type="number"], input[type="text"], .form-control {
+    width: 100%;
+    max-width: 200px; 
+    margin-bottom: 10px; 
 }
 
 button {
@@ -27,21 +34,18 @@ button {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #dee2e6;
-    background-color: #e9ecef;
+    background-color: #81868b;
 }
 
-
-/* Estilo para contenedor de resultados previos */
 #previous-results {
     color: black;
     margin-top: 20px;
-    display: flex; /* Mostrar resultados previos en línea horizontalmente */
-    flex-wrap: wrap; /* Envolver resultados si no caben en una línea */
-    background: linear-gradient(to bottom, #ffffff, #dddddd); /* Degradado de blanco (#ffffff) a gris claro (#dddddd) */
+    display: flex; 
+    flex-wrap: wrap; 
     padding: 15px;
     border-radius: 5px;
+    background-color: #81868b;
 }
-
 
 .previous-result {
     flex: 1 1 calc(50% - 10px); 
@@ -50,8 +54,64 @@ button {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f0f0f0;
-    background: linear-gradient(to bottom, #ffffff, #dddddd);
 }
 
+#funds {
+    width: 100%;
+    max-width: 200px;
+}
 
+.btn {
+    margin-right: 10px; 
+}
+
+.card {
+    margin-bottom: 20px; 
+}
+
+.card-title {
+    font-size: 1.25rem; 
+}
+
+.card-body {
+    background-color: #ffffff; 
+}
+
+.card-img-top {
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.modal-content {
+    background-color: #ffffff; 
+}
+
+.modal-title {
+    color: #343a40; 
+}
+
+.card-img-overlay {
+    background: rgba(0,0,0,0.5); 
+    color: white; 
+    padding: 10px; 
+}
+
+.footer {
+    margin-top: 5px;
+    background-color: #81868b;
+    color: #fff;
+    padding: 30px 0;
+}
+.social-icons {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+}
+.social-icons li {
+    display: inline-block; 
+    margin-right: 10px;
+}
+.social-icons li a {
+    color: #fff;
+    font-size: 20px;
+}
