@@ -1,10 +1,57 @@
-* {
-    margin: 0;
-    padding: 0;
-}
 body {
-    text-align: center;
-    font-weight: bold;
-    background-image: url(img/valvegod.jpg);
-    color: #3BA0D0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #d1d8df;
+    background: url(img/-1629042395572.webp);
 }
+
+h1 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+button {
+    margin-top: 20px;
+}
+
+#result {
+    color: black;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    background-color: #e9ecef;
+}
+
+
+/* Estilo para contenedor de resultados previos */
+#previous-results {
+    color: black;
+    margin-top: 20px;
+    display: flex; /* Mostrar resultados previos en línea horizontalmente */
+    flex-wrap: wrap; /* Envolver resultados si no caben en una línea */
+    background: linear-gradient(to bottom, #ffffff, #dddddd); /* Degradado de blanco (#ffffff) a gris claro (#dddddd) */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+
+.previous-result {
+    flex: 1 1 calc(50% - 10px); 
+    margin-right: 10px; 
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    background: linear-gradient(to bottom, #ffffff, #dddddd);
+}
+
+
