@@ -8,7 +8,7 @@ document.getElementById('add-game').addEventListener('click', addGame);
 document.getElementById('save-calculation').addEventListener('click', saveCalculation);
 
 function addGame() {
-    const gameCount = games.length + 1;
+    const gameCount = document.querySelectorAll('#games-container .form-group').length + 1;
     const gameContainer = document.createElement('div');
     gameContainer.className = 'form-group';
     gameContainer.innerHTML = `
@@ -25,7 +25,7 @@ function addGame() {
 
 function calculateBudget() {
     funds = parseFloat(document.getElementById('funds').value);
-    games.length = 0; // Limpiar datos previos de juegos
+    games.length = 0; 
 
     const gameInputs = document.querySelectorAll('#games-container .form-group');
     gameInputs.forEach((gameInput, index) => {
@@ -68,7 +68,7 @@ function calculateBudget() {
         remainingFunds -= games[i].price;
     }
 
-    // Mostrar modal para ingresar nombre del cálculo
+
     $('#nameModal').modal('show');
 }
 
@@ -88,11 +88,11 @@ function saveCalculation() {
     });
     localStorage.setItem('previousResults', JSON.stringify(previousResults));
 
-    // Limpiar modal y cerrarlo
+  
     document.getElementById('calculation-name').value = '';
     $('#nameModal').modal('hide');
 
-    // Mostrar resultados actualizados
+    
     displayResult(remainingFunds);
     displayPreviousResults();
 }
@@ -145,17 +145,17 @@ function displayPreviousResults() {
     });
 }
 
-// Definición de la función deleteCalculation
+
 function deleteCalculation(index) {
     let previousResults = JSON.parse(localStorage.getItem('previousResults')) || [];
     
-    // Remove the calculation at the specified index
+  
     previousResults.splice(index, 1);
     
-    // Update localStorage
+   
     localStorage.setItem('previousResults', JSON.stringify(previousResults));
     
-    // Refresh the display of previous results
+ 
     displayPreviousResults();
 }
 
