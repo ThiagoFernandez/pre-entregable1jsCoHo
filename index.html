@@ -3,21 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steam Game Budget Simulator</title>
-    <!--js-->
-    <script type="module" src="js/main.js" defer></script>
-    <script async src="js/utils.js"></script>
-    <script async src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script async src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!--css-->
+    <title>Game Budget Simulator</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <!-- JS -->
+    <script async src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="js/main.js" defer></script>
+    <script type="module" src="js/utils.js" defer></script>
 </head>
 <body>
+    <!-- Modal for Platform and Payment Settings -->
+    <div class="modal fade" id="platformModal" tabindex="-1" role="dialog" aria-labelledby="platformModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="platformModalLabel">Select Platform and Payment Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="platform">Choose Platform:</label>
+                    <select id="platform" class="form-control">
+                        <option value="steam">Steam</option>
+                        <option value="epic">Epic Games</option>
+                        <option value="ea">EA</option>
+                        <option value="ubisoft">Ubisoft</option>
+                        <option value="battlenet">Battle.net</option>
+                        <option value="nintendo">Nintendo</option>
+                    </select>
+                    <label for="currency" class="mt-3">Choose Currency:</label>
+                    <select id="currency" class="form-control">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="gbp">GBP</option>
+                        <option value="jpy">JPY</option>
+                    </select>
+                    <label for="payment-method" class="mt-3">Choose Payment Method:</label>
+                    <select id="payment-method" class="form-control">
+                        <option value="credit-card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="crypto">Cryptocurrency</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirm-settings">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-5">
-        <h1 class="mb-4">Steam Game Budget Simulator</h1>
+        <h1 class="mb-4">Game Budget Simulator</h1>
         <div class="row mb-4">
             <div class="col-md-8">
                 <label for="funds">Available Funds:</label>

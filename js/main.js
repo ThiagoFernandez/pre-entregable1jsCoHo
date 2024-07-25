@@ -1,15 +1,54 @@
-import { showError, validatePositiveNumber, validateDiscount, saveToLocalStorage, getFromLocalStorage } from './utils.js';
+import { showError, validatePositiveNumber, validateDiscount, saveToLocalStorage, getFromLocalStorage, displayResult } from './utils.js';
 
 // Definición global de las variables
 let funds;
 let games = []; // Inicializa games como un array vacío
 let remainingFunds;
+let platform; // Nueva variable para la plataforma
+let currency; // Nueva variable para la moneda
+let paymentMethod; // Nueva variable para el método de pago
 
 // Event Listeners
+document.addEventListener('DOMContentLoaded', initPage);
 document.getElementById('calculate-budget').addEventListener('click', calculateBudget);
 document.getElementById('clear-results').addEventListener('click', clearResults);
 document.getElementById('add-game').addEventListener('click', addGame);
 document.getElementById('save-calculation').addEventListener('click', saveCalculation);
+document.getElementById('confirm-settings').addEventListener('click', confirmSettings);
+document.getElementById('platform').addEventListener('change', updatePlatform);
+document.getElementById('currency').addEventListener('change', updateCurrency);
+document.getElementById('payment-method').addEventListener('change', updatePaymentMethod);
+
+// Inicializa la página con las selecciones
+function initPage() {
+    showPlatformModal();
+}
+
+// Muestra el modal para seleccionar la plataforma
+function showPlatformModal() {
+    $('#platformModal').modal('show');
+}
+
+// Actualiza la plataforma seleccionada
+function updatePlatform() {
+    platform = document.getElementById('platform').value;
+}
+
+// Actualiza la moneda seleccionada
+function updateCurrency() {
+    currency = document.getElementById('currency').value;
+}
+
+// Actualiza el método de pago seleccionado
+function updatePaymentMethod() {
+    paymentMethod = document.getElementById('payment-method').value;
+}
+
+// Confirma la selección y aplica los cambios
+function confirmSettings() {
+    document.body.className = platform; // Cambia la clase del body
+    $('#platformModal').modal('hide'); // Oculta el modal de plataforma
+}
 
 // Función para agregar un nuevo juego
 function addGame() {
@@ -17,7 +56,7 @@ function addGame() {
     const gameContainer = document.createElement('div');
     gameContainer.className = 'form-group';
     gameContainer.innerHTML = `
-        <label for="game${gameCount}_price">Price of Game ${gameCount}:</label>
+        <label for="game${gameCount}_price">Price of Game ${gameCount} (${currency}):</label>
         <input type="number" id="game${gameCount}_price" class="form-control" placeholder="Price of Game ${gameCount}">
         <div class="form-check">
             <input type="checkbox" id="game${gameCount}_discount" class="form-check-input">
@@ -32,11 +71,6 @@ function addGame() {
 function calculateBudget() {
     try {
         funds = parseFloat(document.getElementById('funds').value);
-        if (!validatePositiveNumber(funds)) {
-            showError('Please enter a valid amount of funds.');
-            return;
-        }
-        
         games = []; // Reinicia el array de juegos
 
         const gameInputs = document.querySelectorAll('#games-container .form-group');
@@ -96,43 +130,26 @@ function saveCalculation() {
             return;
         }
 
-        let previousResults = getFromLocalStorage('previousResults');
+        let previousResults = getFromLocalStorage('previousResults') || [];
         previousResults.push({
             name: calculationName,
             funds: funds,
             games: games,
-            remainingFunds: remainingFunds
+            remainingFunds: remainingFunds,
+            platform: platform,
+            currency: currency,
+            paymentMethod: paymentMethod
         });
         saveToLocalStorage('previousResults', previousResults);
 
         document.getElementById('calculation-name').value = '';
         $('#nameModal').modal('hide');
 
-        displayResult(remainingFunds);
+        displayResult(funds, games, remainingFunds, currency);
         displayPreviousResults();
     } catch (error) {
         console.error('Error saving calculation:', error);
         showError('An error occurred while saving the calculation.');
-    }
-}
-
-// Función para mostrar el resultado del cálculo
-function displayResult(remainingFunds) {
-    const resultElement = document.getElementById('result');
-    resultElement.innerHTML = '<h2>Result:</h2>';
-    resultElement.innerHTML += '<p>Available Funds: $' + funds.toFixed(2) + '</p>';
-
-    for (let i = 0; i < games.length; i++) {
-        resultElement.innerHTML += '<p>Price of Game ' + (i + 1) + ': $' + games[i].price.toFixed(2) + '</p>';
-        if (games[i].discount) {
-            resultElement.innerHTML += '<p>This game has a discount!</p>';
-        }
-    }
-
-    resultElement.innerHTML += '<p>Remaining Funds: $' + remainingFunds.toFixed(2) + '</p>';
-
-    if (remainingFunds < 0) {
-        showError("You don't have enough funds to purchase these games!");
     }
 }
 
@@ -147,7 +164,7 @@ function clearResults() {
 // Función para mostrar resultados anteriores
 function displayPreviousResults() {
     try {
-        const previousResults = getFromLocalStorage('previousResults');
+        const previousResults = getFromLocalStorage('previousResults') || [];
         let previousResultsElement = document.getElementById('previous-results');
         previousResultsElement.innerHTML = '<h2>Previous Results:</h2>';
         if (previousResults.length === 0) {
@@ -155,16 +172,16 @@ function displayPreviousResults() {
         } else {
             previousResults.forEach(result => {
                 previousResultsElement.innerHTML += '<div class="result-item"><h4>' + (result.name || 'Unnamed Calculation') + '</h4>';
-                previousResultsElement.innerHTML += '<p>Available Funds: $' + (result.funds ? result.funds.toFixed(2) : 'N/A') + '</p>';
+                previousResultsElement.innerHTML += `<p>Available Funds: ${result.currency || 'N/A'} ${result.funds ? result.funds.toFixed(2) : 'N/A'}</p>`;
                 if (result.games && Array.isArray(result.games)) {
                     result.games.forEach((game, index) => {
-                        previousResultsElement.innerHTML += '<p>Price of Game ' + (index + 1) + ': $' + (game.price ? game.price.toFixed(2) : 'N/A') + '</p>';
+                        previousResultsElement.innerHTML += `<p>Price of Game ${index + 1}: ${result.currency || 'N/A'} ${game.price ? game.price.toFixed(2) : 'N/A'}</p>`;
                         if (game.discount) {
                             previousResultsElement.innerHTML += '<p>This game has a discount!</p>';
                         }
                     });
                 }
-                previousResultsElement.innerHTML += '<p>Remaining Funds: $' + (result.remainingFunds ? result.remainingFunds.toFixed(2) : 'N/A') + '</p></div>';
+                previousResultsElement.innerHTML += `<p>Remaining Funds: ${result.currency || 'N/A'} ${result.remainingFunds ? result.remainingFunds.toFixed(2) : 'N/A'}</p></div>`;
             });
         }
     } catch (error) {

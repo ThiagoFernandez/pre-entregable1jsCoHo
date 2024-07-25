@@ -5,6 +5,35 @@ body {
     color: #343a40;
     margin: 0;
     padding: 0;
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease;
+    font-size: 16px;
+}
+
+/* Backgrounds for different platforms */
+body.steam {
+    background-image: url('img/steam-background.jpg');
+}
+
+body.epic {
+    background-image: url('img/epic-background.jpg');
+}
+
+body.ea {
+    background-image: url('img/ea-background.jpg');
+}
+
+body.ubisoft {
+    background-image: url('img/ubisoft-background.jpg');
+}
+
+body.battlenet {
+    background-image: url('img/battlenet-background.jpg');
+}
+
+body.nintendo {
+    background-image: url('img/nintendo-background.jpg');
 }
 
 .container {
@@ -15,8 +44,10 @@ body {
 
 h1, h2, h3, h4 {
     color: #007bff;
+    font-weight: bold;
 }
 
+/* Footer */
 footer {
     background-color: #343a40;
     color: #ffffff;
@@ -24,6 +55,12 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .footer .social-icons {
@@ -81,8 +118,15 @@ footer {
     border-color: #bd2130;
 }
 
+.btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    outline: none;
+}
+
 /* Carousel */
 .carousel-item img {
+    width: 100%;
+    height: auto;
     border-radius: 0.5rem;
 }
 
@@ -100,7 +144,7 @@ footer {
 
 /* Form */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-control {
@@ -138,6 +182,10 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Result and Previous Results */
 #result, #previous-results {
     margin-top: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 15px;
 }
 
 .result-item {
