@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Game 1",
+        "price": 29.99,
+        "discount": 10,
+        "genre": "Action",
+        "description": "An action-packed adventure game.",
+        "image": "https://example.com/game1.jpg",
+        "releaseDate": "2024-06-01"
+    },
+    {
+        "name": "Game 2",
+        "price": 49.99,
+        "discount": 20,
+        "genre": "RPG",
+        "description": "A deep and immersive RPG experience.",
+        "image": "https://example.com/game2.jpg",
+        "releaseDate": "2024-07-15"
+    },
+    {
+        "name": "Game 3",
+        "price": 19.99,
+        "discount": 0,
+        "genre": "Puzzle",
+        "description": "A fun and challenging puzzle game.",
+        "image": "https://example.com/game3.jpg",
+        "releaseDate": "2024-08-20"
+    }
+]
