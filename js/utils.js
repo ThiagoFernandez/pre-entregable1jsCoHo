@@ -31,6 +31,11 @@ export function displayResult(funds, games, remainingFunds, currency) {
     resultElement.innerHTML = '<h2>Result:</h2>';
     resultElement.innerHTML += `<p>Available Funds: ${currency} ${funds.toFixed(2)}</p>`;
 
+    if (remainingFunds < 0) {
+        showError("You don't have enough funds to purchase these games!");
+        return; // Salir de la función si no hay suficientes fondos
+    }
+
     for (let i = 0; i < games.length; i++) {
         resultElement.innerHTML += `<p>Price of Game ${i + 1}: ${currency} ${games[i].price.toFixed(2)}</p>`;
         if (games[i].discount) {
@@ -39,8 +44,4 @@ export function displayResult(funds, games, remainingFunds, currency) {
     }
 
     resultElement.innerHTML += `<p>Remaining Funds: ${currency} ${remainingFunds.toFixed(2)}</p>`;
-
-    if (remainingFunds < 0) {
-        showError("You don't have enough funds to purchase these games!");
-    }
 }

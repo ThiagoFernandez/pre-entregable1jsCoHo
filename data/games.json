@@ -5,7 +5,7 @@
         "discount": 10,
         "genre": "Action",
         "description": "An action-packed adventure game.",
-        "image": "https://example.com/game1.jpg",
+        "image": "",
         "releaseDate": "2024-06-01"
     },
     {
@@ -14,7 +14,7 @@
         "discount": 20,
         "genre": "RPG",
         "description": "A deep and immersive RPG experience.",
-        "image": "https://example.com/game2.jpg",
+        "image": "",
         "releaseDate": "2024-07-15"
     },
     {
@@ -23,7 +23,7 @@
         "discount": 0,
         "genre": "Puzzle",
         "description": "A fun and challenging puzzle game.",
-        "image": "https://example.com/game3.jpg",
+        "image": "",
         "releaseDate": "2024-08-20"
     }
 ]

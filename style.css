@@ -13,33 +13,34 @@ body {
 
 /* Backgrounds for different platforms */
 body.steam {
-    background-image: url('img/steam-background.jpg');
+    background-image: url('assets/img/steam-background.jpg');
 }
 
 body.epic {
-    background-image: url('img/epic-background.jpg');
+    background-image: url('assets/img/epic-background.jpg');
 }
 
 body.ea {
-    background-image: url('img/ea-background.jpg');
+    background-image: url('assets/img/ea-background.jpg');
 }
 
 body.ubisoft {
-    background-image: url('img/ubisoft-background.jpg');
+    background-image: url('assets/img/ubisoft-background.jpg');
 }
 
 body.battlenet {
-    background-image: url('img/battlenet-background.jpg');
+    background-image: url('assets/img/battlenet-background.jpg');
 }
 
 body.nintendo {
-    background-image: url('img/nintendo-background.jpg');
+    background-image: url('assets/img/nintendo-background.jpg');
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    padding-bottom: 80px; /* Adjusted padding-bottom to accommodate footer */
 }
 
 h1, h2, h3, h4 {
@@ -49,23 +50,27 @@ h1, h2, h3, h4 {
 
 /* Footer */
 footer {
-    background-color: #343a40;
+    background-color: #343a40; /* Color de fondo del footer */
     color: #ffffff;
-    padding: 20px 0;
-    position: fixed;
+    padding: 10px 0; /* Padding ajustado */
+    position: fixed; /* Cambio a fixed para mantener el footer en la parte inferior */
     bottom: 0;
     width: 100%;
+    z-index: 1000; /* Asegura que el footer esté sobre otros contenidos */
 }
 
 .footer .container {
+    background-color: #343a40; /* Mismo color de fondo que el footer */
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0; /* Ajustado para que el fondo del contenedor se alinee con el footer */
 }
 
 .footer .social-icons {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .footer .social-icons li {
@@ -80,7 +85,7 @@ footer {
 
 .footer p {
     margin: 0;
-    padding: 10px 0;
+    padding: 5px 0; /* Padding reducido para mantener el diseño compacto */
 }
 
 /* Buttons */
@@ -126,7 +131,6 @@ footer {
 /* Carousel */
 .carousel-item img {
     width: 100%;
-    height: auto;
     border-radius: 0.5rem;
 }
 

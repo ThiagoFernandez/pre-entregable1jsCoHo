@@ -12,6 +12,7 @@ let paymentMethod; // Nueva variable para el método de pago
 document.addEventListener('DOMContentLoaded', initPage);
 document.getElementById('calculate-budget').addEventListener('click', calculateBudget);
 document.getElementById('clear-results').addEventListener('click', clearResults);
+document.getElementById('clear-history').addEventListener('click', clearHistory);
 document.getElementById('add-game').addEventListener('click', addGame);
 document.getElementById('save-calculation').addEventListener('click', saveCalculation);
 document.getElementById('confirm-settings').addEventListener('click', confirmSettings);
@@ -22,6 +23,7 @@ document.getElementById('payment-method').addEventListener('change', updatePayme
 // Inicializa la página con las selecciones
 function initPage() {
     showPlatformModal();
+    displayPreviousResults(); // Muestra resultados anteriores al cargar la página
 }
 
 // Muestra el modal para seleccionar la plataforma
@@ -46,7 +48,11 @@ function updatePaymentMethod() {
 
 // Confirma la selección y aplica los cambios
 function confirmSettings() {
-    document.body.className = platform; // Cambia la clase del body
+    if (!platform || !currency || !paymentMethod) {
+        showError('Please select a platform, currency, and payment method.');
+        return;
+    }
+    document.body.className = platform; // Cambia la clase del body para aplicar el fondo
     $('#platformModal').modal('hide'); // Oculta el modal de plataforma
 }
 
@@ -110,9 +116,9 @@ function calculateBudget() {
 
         remainingFunds = funds;
 
-        for (let i = 0; i < games.length; i++) {
-            remainingFunds -= games[i].price;
-        }
+        games.forEach(game => {
+            remainingFunds -= game.price;
+        });
 
         $('#nameModal').modal('show');
     } catch (error) {
@@ -159,6 +165,14 @@ function clearResults() {
     document.getElementById('previous-results').innerHTML = '';
     document.getElementById('games-container').innerHTML = '';
     document.getElementById('funds').value = '';
+}
+
+// Función para borrar el historial de cálculos guardados
+function clearHistory() {
+    if (confirm('Are you sure you want to clear all previous results?')) {
+        localStorage.removeItem('previousResults');
+        displayPreviousResults();
+    }
 }
 
 // Función para mostrar resultados anteriores
