@@ -11,7 +11,7 @@ body {
     font-size: 16px;
 }
 
-/* Backgrounds for different platforms */
+
 body.steam {
     background-image: url('assets/img/steam-background.jpg');
 }
@@ -40,7 +40,7 @@ body.nintendo {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    padding-bottom: 80px; /* Adjusted padding-bottom to accommodate footer */
+    padding-bottom: 80px; 
 }
 
 h1, h2, h3, h4 {
@@ -50,21 +50,21 @@ h1, h2, h3, h4 {
 
 /* Footer */
 footer {
-    background-color: #343a40; /* Color de fondo del footer */
+    background-color: #343a40; 
     color: #ffffff;
-    padding: 10px 0; /* Padding ajustado */
-    position: fixed; /* Cambio a fixed para mantener el footer en la parte inferior */
+    padding: 10px 0; 
+    position: fixed; 
     bottom: 0;
     width: 100%;
-    z-index: 1000; /* Asegura que el footer esté sobre otros contenidos */
+    z-index: 1000; 
 }
 
 .footer .container {
-    background-color: #343a40; /* Mismo color de fondo que el footer */
+    background-color: #343a40;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0; /* Ajustado para que el fondo del contenedor se alinee con el footer */
+    padding: 0; 
 }
 
 .footer .social-icons {
@@ -85,10 +85,10 @@ footer {
 
 .footer p {
     margin: 0;
-    padding: 5px 0; /* Padding reducido para mantener el diseño compacto */
+    padding: 5px 0; 
 }
 
-/* Buttons */
+
 .btn {
     border-radius: 0.25rem;
 }
@@ -183,7 +183,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border-top: 1px solid #dee2e6;
 }
 
-/* Result and Previous Results */
+
 #result, #previous-results {
     margin-top: 20px;
     background-color: #ffffff;
