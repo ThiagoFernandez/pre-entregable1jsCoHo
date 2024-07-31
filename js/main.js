@@ -2,11 +2,13 @@ import { showError, validatePositiveNumber, validateDiscount, saveToLocalStorage
 
 // Definición global de las variables
 let funds;
-let games = []; // Inicializa games como un array vacío
+let games = []; 
 let remainingFunds;
-let platform; // Nueva variable para la plataforma
-let currency; // Nueva variable para la moneda
-let paymentMethod; // Nueva variable para el método de pago
+let platform; // variable para la plataforma
+let currency; // variable para la moneda
+let paymentMethod; // variable para el método de pago
+let gamesData = []; // Variable para almacenar datos de juegos desde JSON
+let selectedGame = null; // variable para almacenar el juego seleccionado
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', initPage);
@@ -20,10 +22,11 @@ document.getElementById('platform').addEventListener('change', updatePlatform);
 document.getElementById('currency').addEventListener('change', updateCurrency);
 document.getElementById('payment-method').addEventListener('change', updatePaymentMethod);
 
-// Inicializa la página con las selecciones
-function initPage() {
+// Inicializa la página con las selecciones y carga los datos de juegos
+async function initPage() {
     showPlatformModal();
     displayPreviousResults(); // Muestra resultados anteriores al cargar la página
+    await loadGamesData(); // Carga los datos de juegos
 }
 
 // Muestra el modal para seleccionar la plataforma
@@ -52,8 +55,8 @@ function confirmSettings() {
         showError('Please select a platform, currency, and payment method.');
         return;
     }
-    document.body.className = platform; // Cambia la clase del body para aplicar el fondo
-    $('#platformModal').modal('hide'); // Oculta el modal de plataforma
+    document.body.className = platform; 
+    $('#platformModal').modal('hide'); 
 }
 
 // Función para agregar un nuevo juego
@@ -77,7 +80,7 @@ function addGame() {
 function calculateBudget() {
     try {
         funds = parseFloat(document.getElementById('funds').value);
-        games = []; // Reinicia el array de juegos
+        games = []; 
 
         const gameInputs = document.querySelectorAll('#games-container .form-group');
         gameInputs.forEach((gameInput, index) => {
@@ -201,5 +204,64 @@ function displayPreviousResults() {
     } catch (error) {
         console.error('Error displaying previous results:', error);
         showError('An error occurred while displaying previous results.');
+    }
+}
+
+// Función para cargar los datos de juegos desde el JSON
+async function loadGamesData() {
+    try {
+        const response = await fetch('data/games.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        gamesData = await response.json();
+        displayGames();
+    } catch (error) {
+        console.error('Error loading games data:', error);
+    }
+}
+
+// Función para mostrar juegos en el contenedor de recomendaciones
+function displayGames() {
+    const gameCarousel = document.getElementById('game-carousel');
+    if (!gameCarousel) return;
+
+    const carouselInner = gameCarousel.querySelector('.carousel-inner');
+    carouselInner.innerHTML = ''; // Limpia el contenido actual
+
+    gamesData.forEach((game, index) => {
+        const isActive = index === 0 ? 'active' : ''; 
+
+        const gameItem = document.createElement('div');
+        gameItem.className = `carousel-item ${isActive}`;
+        gameItem.innerHTML = `
+            <img src="${game.image}" class="d-block w-100" alt="${game.name}" style="height: 300px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>${game.name}</h3>
+                <p>Price: ${currency || 'N/A'} ${game.price ? game.price.toFixed(2) : 'N/A'}</p>
+                <p>Discount: ${game.discount || 'N/A'}%</p>
+                <p>${game.description || 'No description available.'}</p>
+                <p>Release Date: ${game.releaseDate ? new Date(game.releaseDate).toLocaleDateString() : 'N/A'}</p>
+                <button class="btn btn-primary select-game" data-index="${index}">Select Game</button>
+            </div>
+        `;
+        carouselInner.appendChild(gameItem);
+    });
+
+    // Añade el event listener para los botones de selección de juegos
+    document.querySelectorAll('.select-game').forEach(button => {
+        button.addEventListener('click', selectGame);
+    });
+}
+
+// Función para seleccionar un juego desde el carrusel
+function selectGame(event) {
+    const index = event.target.getAttribute('data-index');
+    selectedGame = gamesData[index];
+    if (selectedGame) {
+        // Actualiza el formulario con los datos del juego seleccionado
+        document.getElementById('funds').value = selectedGame.price.toFixed(2); 
+        addGame(); // Llama a addGame para añadir un nuevo campo de juego (si necesario)
+        document.querySelector(`#game1_price`).value = selectedGame.price.toFixed(2);
     }
 }

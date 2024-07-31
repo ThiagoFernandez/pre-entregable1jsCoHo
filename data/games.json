@@ -1,29 +1,20 @@
 [
     {
-        "name": "Game 1",
+        "name": "Lies of P",
         "price": 29.99,
         "discount": 10,
         "genre": "Action",
         "description": "An action-packed adventure game.",
-        "image": "",
+        "image": "https://waytoomany.games/wp-content/uploads/2023/09/1318376.jpeg",
         "releaseDate": "2024-06-01"
     },
     {
-        "name": "Game 2",
+        "name": "Hogwarts Legacy",
         "price": 49.99,
         "discount": 20,
         "genre": "RPG",
         "description": "A deep and immersive RPG experience.",
-        "image": "",
+        "image": "assets/img/header.jpg",
         "releaseDate": "2024-07-15"
-    },
-    {
-        "name": "Game 3",
-        "price": 19.99,
-        "discount": 0,
-        "genre": "Puzzle",
-        "description": "A fun and challenging puzzle game.",
-        "image": "",
-        "releaseDate": "2024-08-20"
     }
 ]
